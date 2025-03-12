@@ -1,0 +1,197 @@
+Environment:
+	Python: 3.9.7
+	PyTorch: 2.4.1+cu118
+	Torchvision: 0.19.1+cu118
+	CUDA: 11.8
+	CUDNN: 90100
+	NumPy: 1.26.4
+	PIL: 10.0.1
+Args:
+	algorithm: SAM_ERM
+	checkpoint_freq: None
+	data_dir: ./domainbed/data/MNIST/
+	dataset: ColoredMNIST
+	holdout_fraction: 0.2
+	hparams: {"sam_rho": 0.05, "lr": 0.001}
+	hparams_seed: 0
+	output_dir: ./results_sam_erm_coloredmnist
+	save_model_every_checkpoint: False
+	seed: 0
+	skip_model_save: False
+	steps: None
+	task: domain_generalization
+	test_envs: [1]
+	trial_seed: 0
+	uda_holdout_fraction: 0
+HParams:
+	batch_size: 64
+	class_balanced: False
+	data_augmentation: True
+	dinov2: False
+	freeze_bn: False
+	lars: False
+	linear_steps: 500
+	lr: 0.001
+	nonlinear_classifier: False
+	resnet18: False
+	resnet50_augmix: True
+	resnet_dropout: 0.0
+	sam_rho: 0.05
+	vit: False
+	vit_attn_tune: False
+	vit_dropout: 0.0
+	weight_decay: 0.0
+Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz
+Failed to download (trying next):
+HTTP Error 404: Not Found
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-images-idx3-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw/train-images-idx3-ubyte.gz
+  0%|          | 0/9912422 [00:00<?, ?it/s] 13%|#2        | 1245184/9912422 [00:00<00:00, 11732299.91it/s] 90%|######### | 8945664/9912422 [00:00<00:00, 49088570.74it/s]100%|##########| 9912422/9912422 [00:00<00:00, 45296156.34it/s]
+Extracting ./domainbed/data/MNIST/MNIST/raw/train-images-idx3-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz
+Failed to download (trying next):
+HTTP Error 404: Not Found
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/train-labels-idx1-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw/train-labels-idx1-ubyte.gz
+  0%|          | 0/28881 [00:00<?, ?it/s]100%|##########| 28881/28881 [00:00<00:00, 1494413.87it/s]
+Extracting ./domainbed/data/MNIST/MNIST/raw/train-labels-idx1-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz
+Failed to download (trying next):
+HTTP Error 404: Not Found
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-images-idx3-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz
+  0%|          | 0/1648877 [00:00<?, ?it/s] 89%|########9 | 1474560/1648877 [00:00<00:00, 13588533.12it/s]100%|##########| 1648877/1648877 [00:00<00:00, 14707089.96it/s]
+Extracting ./domainbed/data/MNIST/MNIST/raw/t10k-images-idx3-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw
+
+Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz
+Failed to download (trying next):
+HTTP Error 404: Not Found
+
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz
+Downloading https://ossci-datasets.s3.amazonaws.com/mnist/t10k-labels-idx1-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz
+  0%|          | 0/4542 [00:00<?, ?it/s]100%|##########| 4542/4542 [00:00<00:00, 2424965.47it/s]
+Extracting ./domainbed/data/MNIST/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./domainbed/data/MNIST/MNIST/raw
+
+Traceback (most recent call last):
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 174, in <module>
+    algorithm_class = algorithms.get_algorithm_class(args.algorithm)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 72, in get_algorithm_class
+    raise NotImplementedError("Algorithm not found: {}".format(algorithm_name))
+NotImplementedError: Algorithm not found: SAM_ERM
+Environment:
+	Python: 3.9.7
+	PyTorch: 2.4.1+cu118
+	Torchvision: 0.19.1+cu118
+	CUDA: 11.8
+	CUDNN: 90100
+	NumPy: 1.26.4
+	PIL: 10.0.1
+Args:
+	algorithm: SAM
+	checkpoint_freq: None
+	data_dir: ./domainbed/data/MNIST/
+	dataset: ColoredMNIST
+	holdout_fraction: 0.2
+	hparams: {"sam_rho": 0.05, "lr": 0.001}
+	hparams_seed: 0
+	output_dir: ./results_sam_erm_coloredmnist
+	save_model_every_checkpoint: False
+	seed: 0
+	skip_model_save: False
+	steps: None
+	task: domain_generalization
+	test_envs: [1]
+	trial_seed: 0
+	uda_holdout_fraction: 0
+HParams:
+	batch_size: 64
+	class_balanced: False
+	data_augmentation: True
+	dinov2: False
+	freeze_bn: False
+	lars: False
+	linear_steps: 500
+	lr: 0.001
+	nonlinear_classifier: False
+	resnet18: False
+	resnet50_augmix: True
+	resnet_dropout: 0.0
+	sam_rho: 0.05
+	vit: False
+	vit_attn_tune: False
+	vit_dropout: 0.0
+	weight_decay: 0.0
+Traceback (most recent call last):
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 175, in <module>
+    algorithm = algorithm_class(dataset.input_shape, dataset.num_classes, len(dataset) - len(args.test_envs), hparams)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 152, in __init__
+    self.optimizer = SAM(
+TypeError: __init__() got an unexpected keyword argument 'rho'
+Environment:
+	Python: 3.9.7
+	PyTorch: 2.4.1+cu118
+	Torchvision: 0.19.1+cu118
+	CUDA: 11.8
+	CUDNN: 90100
+	NumPy: 1.26.4
+	PIL: 10.0.1
+Args:
+	algorithm: SAM
+	checkpoint_freq: None
+	data_dir: ./domainbed/data/MNIST/
+	dataset: ColoredMNIST
+	holdout_fraction: 0.2
+	hparams: {"sam_rho": 0.05, "lr": 0.001}
+	hparams_seed: 0
+	output_dir: ./results_sam_erm_coloredmnist
+	save_model_every_checkpoint: False
+	seed: 0
+	skip_model_save: False
+	steps: None
+	task: domain_generalization
+	test_envs: [1]
+	trial_seed: 0
+	uda_holdout_fraction: 0
+HParams:
+	batch_size: 64
+	class_balanced: False
+	data_augmentation: True
+	dinov2: False
+	freeze_bn: False
+	lars: False
+	linear_steps: 500
+	lr: 0.001
+	nonlinear_classifier: False
+	resnet18: False
+	resnet50_augmix: True
+	resnet_dropout: 0.0
+	sam_rho: 0.05
+	vit: False
+	vit_attn_tune: False
+	vit_dropout: 0.0
+	weight_decay: 0.0
+Traceback (most recent call last):
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 175, in <module>
+    algorithm = algorithm_class(dataset.input_shape, dataset.num_classes, len(dataset) - len(args.test_envs), hparams)
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 152, in __init__
+    self.optimizer = sam.SAM(
+  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/sam.py", line 31, in __init__
+    self.base_optimizer = base_optimizer(self.param_groups, **kwargs)
+TypeError: 'SGD' object is not callable

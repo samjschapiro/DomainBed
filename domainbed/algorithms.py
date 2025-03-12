@@ -4,12 +4,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.autograd as autograd
-import looksam as looksam
-import nosam as nosam
-import sam as sam
-import esam as esam
-import friendlysam as friendlysam
-import fishersam as fishersam
+import domainbed.nosam as nosam
+import domainbed.sam as sam
+import domainbed.esam as esam
+import domainbed.friendlysam as friendlysam
+import domainbed.fishersam as fishersam
+import domainbed.looksam as looksam
 
 import copy
 import numpy as np
@@ -142,14 +142,14 @@ class SAM(Algorithm):
         )
         self.network = nn.Sequential(self.featurizer, self.classifier)
 
-        base_optimizer = torch.optim.SGD(
+        base_optimizer = torch.optim.Adam(
             self.network.parameters(),
             lr=hparams["lr"],
             momentum=0.9
         )
 
         # Wrap with SAM
-        self.optimizer = SAM(
+        self.optimizer = sam.SAM(
             self.network.parameters(),
             base_optimizer,
             rho=hparams.get("sam_rho", 0.05)
