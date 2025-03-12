@@ -4,12 +4,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.autograd as autograd
-import DomainBed.domainbed.looksam as looksam
-import DomainBed.domainbed.nosam as nosam
-import DomainBed.domainbed.sam as sam
-import DomainBed.domainbed.esam as esam
-import DomainBed.domainbed.friendlysam as friendlysam
-import DomainBed.domainbed.fishersam as fishersam
+import looksam as looksam
+import nosam as nosam
+import sam as sam
+import esam as esam
+import friendlysam as friendlysam
+import fishersam as fishersam
 
 import copy
 import numpy as np
