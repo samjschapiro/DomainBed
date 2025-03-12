@@ -1,36 +1,0 @@
-  0%|          | 0/9912422 [00:00<?, ?it/s] 13%|#2        | 1245184/9912422 [00:00<00:00, 11732299.91it/s] 90%|######### | 8945664/9912422 [00:00<00:00, 49088570.74it/s]100%|##########| 9912422/9912422 [00:00<00:00, 45296156.34it/s]
-  0%|          | 0/28881 [00:00<?, ?it/s]100%|##########| 28881/28881 [00:00<00:00, 1494413.87it/s]
-  0%|          | 0/1648877 [00:00<?, ?it/s] 89%|########9 | 1474560/1648877 [00:00<00:00, 13588533.12it/s]100%|##########| 1648877/1648877 [00:00<00:00, 14707089.96it/s]
-  0%|          | 0/4542 [00:00<?, ?it/s]100%|##########| 4542/4542 [00:00<00:00, 2424965.47it/s]
-Traceback (most recent call last):
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 174, in <module>
-    algorithm_class = algorithms.get_algorithm_class(args.algorithm)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 72, in get_algorithm_class
-    raise NotImplementedError("Algorithm not found: {}".format(algorithm_name))
-NotImplementedError: Algorithm not found: SAM_ERM
-Traceback (most recent call last):
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 175, in <module>
-    algorithm = algorithm_class(dataset.input_shape, dataset.num_classes, len(dataset) - len(args.test_envs), hparams)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 152, in __init__
-    self.optimizer = SAM(
-TypeError: __init__() got an unexpected keyword argument 'rho'
-Traceback (most recent call last):
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File "/home/samuel_schapiro/anaconda3/lib/python3.9/runpy.py", line 87, in _run_code
-    exec(code, run_globals)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/scripts/train.py", line 175, in <module>
-    algorithm = algorithm_class(dataset.input_shape, dataset.num_classes, len(dataset) - len(args.test_envs), hparams)
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/algorithms.py", line 152, in __init__
-    self.optimizer = sam.SAM(
-  File "/home/samuel_schapiro/domainbed_SAM/DomainBed/domainbed/sam.py", line 31, in __init__
-    self.base_optimizer = base_optimizer(self.param_groups, **kwargs)
-TypeError: 'SGD' object is not callable

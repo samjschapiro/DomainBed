@@ -142,16 +142,10 @@ class SAM(Algorithm):
         )
         self.network = nn.Sequential(self.featurizer, self.classifier)
 
-        base_optimizer = torch.optim.Adam(
-            self.network.parameters(),
-            lr=hparams["lr"],
-            momentum=0.9
-        )
-
         # Wrap with SAM
         self.optimizer = sam.SAM(
             self.network.parameters(),
-            base_optimizer,
+            torch.optim.Adam,
             rho=hparams.get("sam_rho", 0.05)
         )
 
