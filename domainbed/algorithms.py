@@ -4,6 +4,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.autograd as autograd
+import DomainBed.domainbed.looksam as looksam
+import DomainBed.domainbed.nosam as nosam
+import DomainBed.domainbed.sam as sam
+import DomainBed.domainbed.esam as esam
+import DomainBed.domainbed.friendlysam as friendlysam
+import DomainBed.domainbed.fishersam as fishersam
 
 import copy
 import numpy as np
@@ -23,6 +29,7 @@ from domainbed.lib.misc import (
 
 
 ALGORITHMS = [
+    'SAM',
     'ERM',
     'ERMPlusPlus',
     'Fish',
@@ -120,6 +127,62 @@ class ERM(Algorithm):
         self.optimizer.step()
 
         return {'loss': loss.item()}
+
+    def predict(self, x):
+        return self.network(x)
+
+class SAM(Algorithm):
+    def __init__(self, input_shape, num_classes, num_domains, hparams):
+        super(SAM, self).__init__(input_shape, num_classes, num_domains, hparams)
+
+        # Initialize network & base optimizer
+        self.featurizer = networks.Featurizer(input_shape, hparams)
+        self.classifier = networks.Classifier(
+            self.featurizer.n_outputs, num_classes, hparams['nonlinear_classifier']
+        )
+        self.network = nn.Sequential(self.featurizer, self.classifier)
+
+        base_optimizer = torch.optim.SGD(
+            self.network.parameters(),
+            lr=hparams["lr"],
+            momentum=0.9
+        )
+
+        # Wrap with SAM
+        self.optimizer = SAM(
+            self.network.parameters(),
+            base_optimizer,
+            rho=hparams.get("sam_rho", 0.05)
+        )
+
+    def update(self, minibatches, unlabeled=None):
+        self.network.train()
+        all_x = torch.cat([x for x, _ in minibatches])
+        all_y = torch.cat([y for _, y in minibatches])
+
+        self.optimizer.zero_grad()
+
+        # First pass (enable BN running stats)
+        sam.enable_running_stats(self.network)
+        logits = self.network(all_x)
+        loss = F.cross_entropy(logits, all_y)
+        loss.backward()
+        self.optimizer.first_step(zero_grad=True)
+
+        # Second pass (disable BN running stats)
+        sam.disable_running_stats(self.network)
+        logits_sharp = self.network(all_x)
+        loss_sharp = F.cross_entropy(logits_sharp, all_y)
+        loss_sharp.backward()
+        self.optimizer.second_step()
+
+        # Optionally re-enable stats at the end (depending on your preference)
+        sam.enable_running_stats(self.network)
+
+        return {
+            "loss": loss.item(),
+            "loss_sharp": loss_sharp.item()
+        }
 
     def predict(self, x):
         return self.network(x)
